@@ -7,8 +7,8 @@
                 <p>Use your email Account</p>
             </div>
     <div id="form-body">
-        <label for="email" :class="{ 'active': isEmailFocused || email }">Email Label</label>
-        <input name="email" type="text" v-model="email" @focus="isEmailFocused = true" @blur="isEmailFocused = false">
+        <label for="email" :class="{ 'active': isEmailFocused || email }">Email</label>
+        <input name="email" :class="{ 'active': isEmailFocused || email }" type="text" v-model="email" @focus="isEmailFocused = true" @blur="isEmailFocused = false">
         <a href="">Forgot password?</a>
     </div>
 
@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         sendEmail() {
-            console.log(`Sending ${this.email}`)
+            console.log(`Sending ${this.isEmailFocused}`)
         }
     }
 };
@@ -50,10 +50,10 @@ export default {
 }
 
 #form-container{
-    width: 20%;
-    height: 50%;
+    width: 380px;
     padding: 28px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
 }
 
 #form-header{
@@ -70,13 +70,35 @@ export default {
     margin-top: 16px;
     margin-bottom: 36px;
 }
-#form-body input{
+
+input{
     height: 48px;
-    font-size: large;
+    font-size: 12px;
+    color: #3e3e3e;
     padding: 8px;
     margin-bottom: 18px;
+    border-radius: 4px;
+    border-top: 1px #a2a2a3 solid ;
+    border-right:1px #a2a2a3 solid;
+    border-bottom: 1px #a2a2a3 solid ;
+    border-left: 1px #a2a2a3 solid ;
 }
-#form-body label {
+
+input.active{
+    border-radius: 4px;
+    border-top: 1px #7B8FF4 solid ;
+    border-right:1px #7B8FF4 solid;
+    border-bottom: 1px #7B8FF4 solid ;
+    border-left: 1px #7B8FF4 solid ;
+    color: #706f6f;
+}
+
+input:-webkit-autofill {
+    background-color: #7b8ff4aa; /* Cambiar el color de fondo */
+    color: #b50f0f; /* Cambiar el color del texto */
+}
+
+label {
     position: absolute;
     top: 10px; /* Ajusta según sea necesario */
     left: 10px; /* Ajusta según sea necesario */
@@ -86,17 +108,19 @@ export default {
     transition: top 0.3s, left 0.3s, font-size 0.3s;
 }
 
-#form-body input:focus + label, 
-#form-body input:not(:placeholder-shown) + label {
-    top: -10px; /* Ajusta según sea necesario */
-    left: 5px; /* Ajusta según sea necesario */
-    font-size: 5.8em;
-    color: #333;
+
+.active {
+    color: #7B8FF4;
+    font-weight: 600;
+    top: -10px;
+    left: 10px; 
+    background-color: white;
+    transition: top 0.3s, left 0.3s, font-size 0.3s; 
 }
 
 #form-footer{
     display: flex;
-    align-items: baseline;
+    align-items:center;
     justify-content: space-between;
 }
 
@@ -105,8 +129,7 @@ img{
     width: auto;
 }
 
-
-#next{
+button{
     width: 86px;
     height: 32px;
     background-color: #7B8FF4;
@@ -115,16 +138,38 @@ img{
     border-radius: 4px;
     border-color: #7B8FF4;
     border: 0ch;
-
+    transition:background-color 0.3s, font-size 0.3s; 
 }
 
 a{
     text-decoration: none;
     color: #7B8FF4;
     font-weight: 600;
+    width: fit-content;
 }
 
 
+button:hover{
+    background-color: white;
+    border: 1px #7B8FF4 solid;
+    color: #7B8FF4;
+    font-size: 15px;
+    transition:background-color 0.5s, font-size 0.5s; 
+}
+
+
+@media (max-width: 612px) {
+
+    #component-container{
+    align-items: start;
+    }
+
+    #form-container{
+        width: 100%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.0); 
+    }
+
+}
 
 
 </style>
