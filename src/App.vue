@@ -6,8 +6,9 @@ import SignIn from './components/SignIn.vue';
 
 <template>
   
-<!--  <NavBar /> -->
-    <SignIn/>
+    <NavBar />
+    <MainPage /> 
+<!--     <SignIn/> -->
   
 </template>
 

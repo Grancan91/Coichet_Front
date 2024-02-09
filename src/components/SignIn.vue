@@ -3,19 +3,28 @@
         <div id="form-container">
             <div id="form-header">
                 <img src="./../images/CoichetLogo.png" alt="">
-                <h2>Sign In</h2>
-                <p>Use your email Account</p>
+                <h2>{{title}}</h2>
+                <p>{{subTitle}}</p>
             </div>
-    <div id="form-body">
+    <div id="form-body" :class="{ 'slide-out-left': isNextClicked }">
         <label for="email" :class="{ 'active': isEmailFocused || email }">Email</label>
-        <input name="email" :class="{ 'active': isEmailFocused || email }" type="text" v-model="email" @focus="isEmailFocused = true" @blur="isEmailFocused = false">
+        <input name="email" :class="{ 'active': isEmailFocused || email}" type="text" v-model="email" @focus="isEmailFocused = true" @blur="isEmailFocused = false">
         <a href="">Forgot password?</a>
+        <div id="form-footer">
+            <a href="">Create Account</a>
+            <button id="next" @click="nextClicked">Next</button>
+        </div>
     </div>
 
-            <div id="form-footer">
-                <a href="">Create Account</a>
-                <button id="next" @click="sendEmail">Next</button>
-            </div>
+    <div class="form-body-password" :class="{'slide-out-right': isNextClicked, 'hidden': isHidden }">
+        <label for="password" :class="{ 'active': isPasswordFocused || password }">Password</label>
+        <input name="password" :class="{ 'active': isPasswordFocused || password }" type="password" v-model="password" @focus="isPasswordFocused = true" @blur="isPasswordFocused = false">
+        <div id="form-footer">
+            <a href="">Back</a>
+            <button id="next" @click="SignInClicked">Sign In</button>
+        </div>
+    </div>
+
         </div>
     </div>
 </template>
@@ -26,13 +35,27 @@ export default {
     el: '#component-container',
     data() {
         return {
+            title: 'Sign In',
+            subTitle: 'Use your email Account',
             email: '',
-            isEmailFocused: false
+            password: '',
+            isEmailFocused: false,
+            isNextClicked: false,
+            isHidden: true
         };
     },
     methods: {
         sendEmail() {
             console.log(`Sending ${this.isEmailFocused}`)
+        },
+         nextClicked() {
+            this.isNextClicked = true;
+            this.title = "{Name of user}",
+            this.subTitle = this.email,
+
+            setTimeout(() => {
+                this.isHidden = false;
+            }, 500);
         }
     }
 };
@@ -54,6 +77,7 @@ export default {
     padding: 28px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    overflow: hidden;
 }
 
 #form-header{
@@ -68,7 +92,20 @@ export default {
     display: flex;
     flex-direction: column;
     margin-top: 16px;
-    margin-bottom: 36px;
+}
+
+.form-body-password{
+    display: flex;
+        flex-direction: column;
+    margin-top: 16px;
+}
+
+.hidden{
+    display: none;
+}
+
+#form-footer{
+      margin-top: 36px;
 }
 
 input{
@@ -93,15 +130,10 @@ input.active{
     color: #706f6f;
 }
 
-input:-webkit-autofill {
-    background-color: #7b8ff4aa; /* Cambiar el color de fondo */
-    color: #b50f0f; /* Cambiar el color del texto */
-}
-
 label {
     position: absolute;
-    top: 10px; /* Ajusta según sea necesario */
-    left: 10px; /* Ajusta según sea necesario */
+    top: 10px;
+    left: 10px; 
     padding: 0 5px;
     color: #aaa;
     pointer-events: none;
@@ -170,6 +202,36 @@ button:hover{
     }
 
 }
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-150%);
+    display: none;
+  }
+}
+
+.slide-out-left {
+  animation: slideOutLeft 0.5s forwards;
+}
+.slide-out-right {
+
+  animation: slideOutRight 0.5s forwards;
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(150%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+
+
 
 
 </style>
