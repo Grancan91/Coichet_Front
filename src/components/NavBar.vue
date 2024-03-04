@@ -5,9 +5,11 @@
         <img src="" alt="">
        </div>
         <div class="log-sign-buttons-container">
-            <button className="w-40 h-40 bg-primary text-white font-medium rounded-md border-primary transition-all">Login</button>
-            <button>Sign Up</button>
-
+            <router-link to="/SignIn">
+                <button className="w-40 h-40 bg-primary text-white font-medium rounded-md border-primary hover:bg-purple-500 transition-all">Login</button>
+            </router-link>
+            
+            <button className="w-40 h-40 bg-white text-primary font-medium rounded-md hover: border-primary hover:border-solid hover:border-2 transition-all">SignUp</button>
         </div>
     </div>
 </template>

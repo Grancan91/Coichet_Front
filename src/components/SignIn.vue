@@ -21,7 +21,9 @@
         <input name="password" :class="{ 'active': isPasswordFocused || password }" type="password" v-model="password" @focus="isPasswordFocused = true" @blur="isPasswordFocused = false">
         <div id="form-footer">
             <a href="">Back</a>
-            <button id="next" @click="SignInClicked">Sign In</button>
+          
+                <button id="next" @click="SignInClicked">Sign In</button>
+       
         </div>
     </div>
 
@@ -29,8 +31,11 @@
     </div>
 </template>
 
-
 <script scoped>
+import { RouterLink } from 'vue-router';
+import { login } from '@/services/auth_service';
+
+
 export default {
     el: '#component-container',
     data() {
@@ -50,13 +55,23 @@ export default {
         },
          nextClicked() {
             this.isNextClicked = true;
-            this.title = "{Name of user}",
-            this.subTitle = this.email,
+            this.title = "{Welcome Back Pepe Jesus}",
+            this.subTitle = "Insert your Password",
 
             setTimeout(() => {
                 this.isHidden = false;
             }, 500);
+        },
+        async SignInClicked() {
+            console.log("Pinchado!")
+            const data = await login(this.email, this.password)
+            console.log(data)
+            if(data){
+              this.$router.push('/');
+            }
+
         }
+
     }
 };
 </script>

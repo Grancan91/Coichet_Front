@@ -1,7 +1,9 @@
 <template>
+
+    <NavBar/>
     <div class="main-container">
         <div class="section-container">
-            <section className="flex">
+            <section className="flex p-4">
                 <img src="./../images/CoichetLogo.png" alt="" className="object-contain h-48 w-48">
                 <div className="flex flex-col justify-center">
                     <h2 className="text-2xl font-bold mt-2">Patrones Propios</h2>
@@ -14,11 +16,14 @@
         </div>
  
     </div>
-    <Card v-for="coichito in coichitos" key="coichito.id" :coichito="coichito"/>
+    <div className="flex gap-4 p-8">
+        <Card v-for="coichito in coichitos" key="coichito.id" :coichito="coichito"/>
+    </div>
 </template>
 
 
 <script setup>
+import NavBar from '../components/NavBar.vue'
 import Card from '../components/Card.vue';
 import { onMounted, ref } from 'vue'
 import { getCoichitos } from "../services/coichito_service";
@@ -49,5 +54,9 @@ onMounted(() => {
 .section-container{
     margin-left: 8rem;
     margin-right: 8rem;
+}
+
+.card_container{
+    display: flex;
 }
 </style>

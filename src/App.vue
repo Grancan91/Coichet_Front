@@ -6,11 +6,8 @@ import AsyncComp from './components/AsyncComp.vue';
 </script>
 
 <template>
-  
-    <NavBar />
-    <AsyncComp/>
-    <MainPage /> 
-<!--     <SignIn/> -->
+
+<router-view></router-view>
   
 </template>
 
