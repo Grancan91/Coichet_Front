@@ -33,7 +33,7 @@
 
 <script scoped>
 import { RouterLink } from 'vue-router';
-import { login } from '@/services/auth_service';
+import { login } from '../services/auth_service';
 
 
 export default {
