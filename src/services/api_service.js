@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:3000/api/",
+    baseURL: "https://coichet-backend.onrender.com/api/",
     timeout: 3000,
     headers: (localStorage.authorization) ? { authorization: localStorage.authorization } : ""
 })
